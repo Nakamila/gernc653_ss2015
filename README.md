@@ -8,5 +8,5 @@ This is the "Read Me" file for the homework repository for Shader Studio taught 
 
 Name: Camila Gernhardt Nakamura
 New School ID: N00440653
-Web: camilanakamura.com
+Web: camilanakamura.com 
 email: gernc653@newschool.edu
