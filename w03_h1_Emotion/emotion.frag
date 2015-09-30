@@ -9,6 +9,8 @@ uniform float u_time;
 vec3 colorB = vec3(0.5,0.709,0.);
 vec3 colorA = vec3(0.317,0.031,0.619);
 
+// emotion: enxious - feeling sick and afraid all mixed up
+
 void main() {
     vec3 color = vec3(0.0);
 
