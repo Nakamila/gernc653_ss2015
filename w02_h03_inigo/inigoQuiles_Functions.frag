@@ -11,12 +11,12 @@ uniform vec2 u_resolution;
 float F (float x, float p, float w){
 
 // //Exponential Step
-// 	return exp (-p*pow(x,w));
+	return exp (-p*pow(x,w));
 
-Power curve
+//Power curve
 
-	float k = pow(p+w,p+w) / (pow(p,p)*pow(w,w));
-	return k * pow( x, p ) * pow( 1.0-x, w );
+	// float k = pow(p+w,p+w) / (pow(p,p)*pow(w,w));
+	// return k * pow( x, p ) * pow( 1.0-x, w );
 
 
 // Parabola
@@ -30,8 +30,8 @@ void main() {
 	vec3 color = vec3 (0.0);
 	
 	
-	float pct = F(st.x, pow(tan(cos(PI*(u_time/2.0))),1.0 - abs(u_time)),.4);
-//	float pct = F(st.x, 1.0 - pow(abs(cos(u_time*0.7)),.5),.5);
+	//float pct = F(st.x, pow(tan(cos(PI*(u_time/2.0))),1.0 - abs(u_time)),.4);
+	float pct = F(st.x, 1.0 - pow(abs(cos(u_time*0.7)),.5),.5);
 
 
     color = vec3 (pct);
