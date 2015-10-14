@@ -81,6 +81,7 @@ void main(){
     vec3 pos = vec3(st,1.);
     
    translate(vec2(-1.25));
+   
    rotate((u_time));
     
 
@@ -91,7 +92,7 @@ void main(){
     
 
     float size = clamp (sin(u_time), 0.0, 0.06);
-    float size2 = clamp (tan(u_time*0.2), 0.0, 0.09); 
+    float size2 = clamp (tan(u_time*0.2), 0.0, 0.2); 
     
     //substract the shapes
     //left down
@@ -99,23 +100,25 @@ void main(){
     color -= circleB (pos.xy+0.1, size*0.5);
     color -= circleB (pos.xy+0.2, 0.1 - size);
     color -= circleB (pos.xy+0.3, 0.2- size2);
-    color -= circleB (pos.xy+0.4, 0.002);
-    color -= circleB (pos.xy+0.5, 0.002);
-    color -= circleB (pos.xy+0.6, 0.002);
-    color -= circleB (pos.xy+0.7, 0.002);
-    color -= circleB (pos.xy+0.8, 0.002);
+    color -= circleB (pos.xy+0.4, 0.007);
+    color -= circleB (pos.xy+0.5, 0.006);
+    color -= circleB (pos.xy+0.6, 0.005);
+    color -= circleB (pos.xy+0.7, 0.004);
+    color -= circleB (pos.xy+0.8, 0.003);
     color -= circleB (pos.xy+0.9, 0.002);
+    color -= circleB (pos.xy+1.0, 0.001);
     
     //right up
     color -= circleB (pos.xy-0.1, size*0.5);
     color -= circleB (pos.xy-0.2, 0.1 - size);
     color -= circleB (pos.xy-0.3, 0.2- size2);
-    color -= circleB (pos.xy-0.4, 0.002);
-    color -= circleB (pos.xy-0.5, 0.002);
-    color -= circleB (pos.xy-0.6, 0.002);
-    color -= circleB (pos.xy-0.7, 0.002);
-    color -= circleB (pos.xy-0.8, 0.002);
+    color -= circleB (pos.xy-0.4, 0.007);
+    color -= circleB (pos.xy-0.5, 0.006);
+    color -= circleB (pos.xy-0.6, 0.005);
+    color -= circleB (pos.xy-0.7, 0.004);
+    color -= circleB (pos.xy-0.8, 0.003);
     color -= circleB (pos.xy-0.9, 0.002);
+    color -= circleB (pos.xy-1., 0.001);
     
     
  
