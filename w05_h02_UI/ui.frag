@@ -23,8 +23,8 @@ float box(vec2 st, vec2 size){
 }
 
 float cross(vec2 st, float size){
-    return  box(st, vec2(size,size/1.)) + 
-            box(st, vec2(size/4.,size));
+    return  box(st, vec2(size/2000.,size/5.)) + 
+            box(st, vec2(size/5.,size/2000.));
    
 }
 
@@ -42,7 +42,7 @@ float rectC(vec2 st, float size){
 }
 
 float circle(vec2 st, float size){
-	return 1.-smoothstep(size-(size*0.01),
+  return 1.-smoothstep(size-(size*0.01),
                          size+(size*0.01),
                          dot(st,st)*4.0);
 }
@@ -50,8 +50,8 @@ float circle(vec2 st, float size){
 
 mat3 scaleMatrix(vec2 f) {
     return mat3(vec3(f.x,0.0,0.0),
-               	vec3(0.0,f.y,0.0),
-               	vec3(0.0,0.0,1.0));
+                vec3(0.0,f.y,0.0),
+                vec3(0.0,0.0,1.0));
 }
 
 void scale(in vec2 f) {
@@ -60,8 +60,8 @@ void scale(in vec2 f) {
 
 mat3 translationMatrix(vec2 f) {
     return mat3(vec3(1.0,0.0,0.0),
-               	vec3(0.0,1.0,0.0),
-               	vec3(f.x,f.y,1.0));
+                vec3(0.0,1.0,0.0),
+                vec3(f.x,f.y,1.0));
 }
 
 void translate(vec2 f) {
@@ -70,8 +70,8 @@ void translate(vec2 f) {
 
 mat3 rotationMatrix(float a) {
     return mat3(vec3(cos(a),-sin(a),0.0),
-               	vec3(sin(a),cos(a),0.0),
-               	vec3(0.0,0.0,1.0));
+                vec3(sin(a),cos(a),0.0),
+                vec3(0.0,0.0,1.0));
 }
 
 void rotate(float a) {
@@ -84,7 +84,8 @@ void main(){
     vec3 pos = vec3(st,1.);
     
    translate(vec2(-.5));
-    rotate(sin(u_time));
+   rotate(sin(u_time));
+
     
     pos = matrix * pos;
     
@@ -95,6 +96,7 @@ void main(){
     
     // uiFixed
     color += rect (pos.xy, 0.03);
+    color+= cross(pos.xy, 10.);
     color += circle(pos.xy, 0.09) - circle(pos.xy, 0.083);
     color += circle(pos.xy, 0.2) - circle(pos.xy, 0.19);
     color += circle(pos.xy, 0.4) - circle(pos.xy, 0.39);
@@ -104,9 +106,9 @@ void main(){
     color += circle(pos.xy, 0.9) - circle(pos.xy, 0.89);
 
     //uiMoving objects
-   
     color-= cross(st-(tan(0.2*u_time)), 0.02);
-    color-= cross(st-(sin(u_time)), 0.02);
+    color-= rect(st-(sin(u_time)), 0.02);
+    color-= circle(1.-(st-(cos(u_time))), 0.005);
 
     
     gl_FragColor = vec4( color ,1.0);
