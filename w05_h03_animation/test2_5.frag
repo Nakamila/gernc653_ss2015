@@ -72,9 +72,9 @@ void rotate(float a) {
 void main(){
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     
-   // st -=1.5;
+    //st -= 10.5;
     st *= 2.5;
-  //  st = 1.- fract(st);
+   // st = fract(st);
 
     
     vec3 color = vec3(0.0);
@@ -119,6 +119,8 @@ void main(){
     color -= circleB (pos.xy-0.8, 0.003);
     color -= circleB (pos.xy-0.9, 0.002);
     color -= circleB (pos.xy-1., 0.001);
+    
+     color += circleB (pos.xy, size);
     
     
  
