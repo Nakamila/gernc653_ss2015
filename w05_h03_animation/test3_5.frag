@@ -1,8 +1,7 @@
-// inspiration:  https://youtu.be/rDaSWRrARnk?t=10s
-// http://gifshop.tv/m/M1XUSD7LSS/#/original
-
 #ifdef GL_ES
 precision mediump float;
+#define white vec3(1., 1.,1.)
+#define black vec3(0.0)
 #endif
 
 uniform vec2 u_resolution;
@@ -25,17 +24,21 @@ float box(vec2 st, vec2 size){
     return uv.x*uv.y;
 }
 
-float cross(vec2 st, float size){
-    return  box(st, vec2(size,size/4.)) + 
-            box(st, vec2(size/4.,size));
-   
+
+
+float circle(vec2 st, float size){
+	return 1.-smoothstep(size-(size*0.01),
+                         size+(size*0.01),
+                         dot(st,st)*4.0);
 }
 
-float cross2(vec2 st, float size){
-    return  box(st, vec2(size/2.5,size/2.5)) + 
-            box(st, vec2(size/2.5,size/2.5));
-   
+//blurried line circle
+float circleB(vec2 st, float size){
+	return 1.-smoothstep(size-(size*0.01),
+                         size+(size*0.9),
+                         dot(st,st)*4.0);
 }
+
 
 mat3 scaleMatrix(vec2 f) {
     return mat3(vec3(f.x,0.0,0.0),
@@ -67,23 +70,44 @@ void rotate(float a) {
     matrix = rotationMatrix(a) * matrix;
 }
 
+
 void main(){
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
-    st*=2.;
-    st = fract(st);
 
     vec3 color = vec3(0.0);
-    vec3 pos = vec3(st,1.0);
+    vec3 pos = vec3(st,1.);
     
-     translate(vec2(-.5));
-     rotate(tan(sin(u_time)+.5));
+    
+   translate(vec2(-.5));
+ 
+   rotate((u_time*2.0));
+    
+
     
     pos = matrix * pos;
     
-    color = vec3(st.x,st.y,0.7);
+    color = vec3(st.x,st.y,0.54);
+      
+    float size = 1. - tan (u_time*0.5);
+
+
+    	
+
+  // circles
     
-    color += cross(pos.xy,0.4);
-    color += cross2(pos.xy,0.5);
+  	color += (circle (pos.xy, 0.009) - circle (pos.xy, 0.05));
+   	color += circle (pos.xy, 0.09) - circle (pos.xy, 0.15);
+    color += circle (pos.xy, 0.19) - circle (pos.xy, 0.25);
+    color += circle (pos.xy, 0.29) - circle (pos.xy, 0.35);
+    color += circle (pos.xy, 0.39) - circle (pos.xy, 0.45);
+	  color += circle (pos.xy, 0.49) - circle (pos.xy, 0.55);
+    color += circle (pos.xy, 0.59) - circle (pos.xy, 0.65);
+    color += circle (pos.xy, 0.69) - circle (pos.xy, 0.75);
+    color += circle (pos.xy, 0.79) - circle (pos.xy, 0.85);
+    color += circle (pos.xy, 0.99) - circle (pos.xy, 1.95);
     
-    gl_FragColor = vec4( color ,1.0);
+   // circle black to white
+    color += circleB (st-0.5, size);
+    
+    gl_FragColor = vec4( color ,1.);
 }
