@@ -11,14 +11,14 @@ float random (float x) {
 }
 
 float time (float t){
-  return floor(sin(u_time)*t);    
+  return floor((u_time)*t);    
 
 }
 
 void main(){
   vec2 st = gl_FragCoord.xy/u_resolution.xy;
     
-    st *= vec2(30.,10);
+    st *= vec2(100.,10);
     st.x += u_time*0.5;
  
     
@@ -29,7 +29,7 @@ void main(){
      vec3 color = vec3(random(time(2.)+i_st.x)); 
    
     if (i_st.y == 1.){ 
-    color = vec3(random(-time(5.)+i_st.x));
+    color = vec3(random(-time(50.)+i_st.x));
     }
     
       if (i_st.y == 2.){ 
@@ -41,7 +41,7 @@ void main(){
     }
      
      if (i_st.y == 4.){ 
-    color = vec3(random(time(4.)+i_st.x));
+    color = vec3(random(time(8.)+i_st.x));
     }
      if (i_st.y == 5.){ 
     color = vec3(random(-time(10.)+i_st.x));
